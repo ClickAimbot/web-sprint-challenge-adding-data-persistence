@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const Resource = require('./model');
 
-router.get('/:resource_id', (req, res, next) => {
-    Resource.getResourceById(req.params.resource_id)
-        .then(resource => {
-            res.status(200).json(resource);
+router.get('/', (req, res, next) => {
+    Resource.getAll()
+        .then(resources => {
+            res.json(resources);
+            console.log(resources)
         })
         .catch(next) 
 })

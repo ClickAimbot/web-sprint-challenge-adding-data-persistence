@@ -1,5 +1,8 @@
-function getTaskById(task_id) {
-  return Promise.resolve('implement getTaskById', task_id);
+const db = require('../../data/dbConfig');
+
+async function getAll() {
+  const result = await db('tasks')
+     return result
 }
 
-module.exports = { getTaskById };
+module.exports = { getAll }

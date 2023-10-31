@@ -1,11 +1,8 @@
 const projects = [
-  { project_name: 'World Domination'},
-  { project_name: 'Get Rich Quick'},
-  { project_name: 'Revenge'},
-  { project_name: 'More Instagram Followers'},
-  { project_name: 'Find the Holy Grail'},
-  { project_name: 'Steal Coworker\'s Identity'},
-  { project_name: 'Have fun!'},
+  { project_name: 'World Domination', project_description: 'Take over the world' },
+  { project_name: 'Get Rich Quick', project_description: 'Make money' },
+  { project_name: 'Revenge', project_description: 'get them back' },
+  { project_name: 'More Instagram Followers', project_description: 'get famous' },
 ]
 
 exports.projects = projects;

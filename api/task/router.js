@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const Task = require('./model');
 
-router.get('/:task_id', (req, res, next) => {
-    Task.getTaskById(req.params.task_id)
-        .then(resource => {
-            res.status(200).json(resource);
+router.get('/', (req, res, next) => {
+    Task.getAll()
+        .then(Tasks => {
+            res.json(Tasks);
+            console.log(Tasks)
         })
-        .catch(next) 
+        .catch(next)  
 })
 
 router.use((err, req, res, next) => { // eslint-disable-line
