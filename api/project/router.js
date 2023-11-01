@@ -16,10 +16,14 @@ router.get('/', async (req, res, next) => {
 });
 
 
-router.post('/', md.checkProjectPayload, md.convertProjectCompleted, async (req, res, next) => {
+router.post('/', md.checkProjectPayload, async (req, res, next) => {
     try {
         const newProject = await Project.createProject(req.body);
-        res.status(201).json(newProject);
+        const newProjectwithBoolean = {
+            ...newProject,
+            project_completed: newProject.project_completed === 1
+        }
+        res.status(201).json(newProjectwithBoolean);
     } catch (error) {
         next(error);
     }

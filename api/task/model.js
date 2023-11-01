@@ -13,4 +13,15 @@ const getAll = () => {
     );
 };
 
-module.exports = { getAll }
+async function getById(id) {
+  return db('tasks').where('task_id', id).first()
+}
+
+const createTask = async (task) => {
+  return db('tasks').insert(task)
+      .then(([task_id]) => {
+          return getById(task_id)
+      })
+}
+
+module.exports = { getAll, getById, createTask}
