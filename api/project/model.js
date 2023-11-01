@@ -10,8 +10,10 @@ async function getById(id) {
 }
 
 const createProject = async (project) => {
-    const [id] = await db('projects').insert(project)
-    return getById(id)
+    return db('projects').insert(project)
+        .then(([project_id]) => {
+            return getById(project_id)
+        })
 }
 
 module.exports = { getAll, getById, createProject }

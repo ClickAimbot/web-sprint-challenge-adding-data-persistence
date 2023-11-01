@@ -1,14 +1,19 @@
 const router = require('express').Router();
 const Task = require('./model');
 
-router.get('/', (req, res, next) => {
-    Task.getAll()
-        .then(Tasks => {
-            res.json(Tasks);
-            console.log(Tasks)
-        })
-        .catch(next)  
-})
+router.get('/', async (req, res, next) => {
+    try {
+        const tasks = await Task.getAll();
+        const tasksWithBoolean = tasks.map(task => ({
+            ...task,
+            task_completed: task.task_completed === 1
+        }));
+        res.json(tasksWithBoolean);
+    } catch (error) {
+        next(error);
+    }
+});
+
 
 router.use((err, req, res, next) => { // eslint-disable-line
     res.status(500).json({

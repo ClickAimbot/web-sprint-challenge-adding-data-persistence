@@ -1,14 +1,14 @@
 const Project = require('./model');
 
 exports.checkProjectPayload = (req, res, next) => {
-    console.log(req.body)
-    const { project_name, project_description, project_completed } = req.body
-    if (!project_name || !project_description || !project_completed) {
-        res.status(400).json({message: 'project name, project description, and project completed are required'})
+    const { project_name, project_description, project_completed } = req.body;
+    if (!project_name || !project_description || project_completed === undefined) {
+        res.status(400).json({ message: 'project name, project description, and project completed are required' });
     } else {
-        next()
+        next();
     }
-}
+};
+
 
 exports.checkProjectId = async (req, res, next) => {
     try {
