@@ -16,19 +16,14 @@ router.get('/', async (req, res, next) => {
 });
 
 
-router.post('/', md.checkProjectPayload, async (req, res, next) => {
+router.post('/', md.checkProjectPayload, md.convertProjectCompleted, async (req, res, next) => {
     try {
         const newProject = await Project.createProject(req.body);
-        const projectWithBoolean = {
-            ...newProject,
-            project_completed: newProject.project_completed === 1
-        };
-        res.json(projectWithBoolean);
+        res.status(201).json(newProject);
     } catch (error) {
         next(error);
     }
 });
-
 
 router.use((err, req, res, next) => { // eslint-disable-line
     res.status(500).json({

@@ -5,4 +5,15 @@ async function getAll() {
        return result
 }
 
-module.exports = { getAll }
+async function getById(id) {
+    return db('resources').where('resource_id', id).first()
+}
+
+const createResource = async (resource) => {
+    return db('resources').insert(resource)
+        .then(([resource_id]) => {
+            return getById(resource_id)
+        })
+}
+
+module.exports = { getAll, getById, createResource }
